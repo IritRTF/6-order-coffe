@@ -9,11 +9,9 @@ addEventBtnClose(btnClose.item(0)); //назначает onclick на самую
 btnAdd.addEventListener('click', ()=> {
     countBeverage ++;
     // console.log(countBeverage);
-    // let form = document.querySelector('form');
     let el = document.getElementsByClassName('beverage');
-    let elClone = el.item(0).cloneNode(true);
-    let seqNum = elClone.querySelector('.sequence-number');
-    seqNum.innerHTML = countBeverage;
+    let elClone = createNextField(el);
+
     el.item(el.length - 1).insertAdjacentElement('afterend', elClone);
     addEventBtnClose(btnClose.item(btnClose.length - 1))
 });
@@ -32,6 +30,29 @@ function addEventBtnClose(btn) {
             updateSeqNum();
         }
     });
+}
+
+function createNextField(el) {
+    let elClone = el.item(0).cloneNode(true);
+    let seqNum = elClone.querySelector('.sequence-number');
+    seqNum.innerHTML = countBeverage;
+
+    let inputs = elClone.querySelectorAll('input');
+    let selecters = elClone.querySelectorAll('select');
+    renumberAttribute(inputs);
+    renumberAttribute(selecters);
+
+    return elClone;
+}
+
+function renumberAttribute(arr){
+    for(let i = 0; i < arr.length; i++){
+        let attribute = arr[i].getAttribute('name');
+        attribute = attribute.replace('-1', `-${countBeverage}`); 
+        console.log(attribute);
+        arr[i].setAttribute('name', attribute) 
+        // console.log(input.getAttribute('name'));
+    }
 }
 
 function updateSeqNum() {
