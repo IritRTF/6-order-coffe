@@ -1,7 +1,19 @@
+.list-beverages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list-beverages__item:not(:last-child) {
+    margin-bottom: 20px;
+}
+
 .beverage {
+    position: relative;
     border: 1px solid #eee;
     margin: 15px 0;
     padding: 15px;
+    /* width: 200px; */
 }
 
 .beverage-count {
@@ -26,6 +38,19 @@
 .checkbox-field {
     margin: 5px 0;
     display: block;
+}
+
+.close-field {
+    position: absolute;
+    top:20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-image: url('./img/Слой 1 копия.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .add-button {
