@@ -1,20 +1,26 @@
 let countBeverage = 1;
+let deadСountBeverage = 1;
 
-let btnAdd = document.querySelector('.add-button');
-let btnClose = document.getElementsByClassName('close-field'); //коллекция всех кнопок "закрытия", автообновление
+//Можно поместить эти переменные в класс
+let btnAdd = document.querySelector('.add-button'); //Можно убрать в функцию
+let btnClose = document.getElementsByClassName('close-field'); //коллекция всех кнопок "закрытия" / убрать в функцию
 let seqNum = document.getElementsByClassName('sequence-number');
 
 addEventBtnClose(btnClose.item(0)); //назначает onclick на самую первую кнопку, не убирать
+addEventListener();
 
-btnAdd.addEventListener('click', ()=> {
-    countBeverage ++;
-    // console.log(countBeverage);
-    let el = document.getElementsByClassName('beverage');
-    let elClone = createNextField(el);
-
-    el.item(el.length - 1).insertAdjacentElement('afterend', elClone);
-    addEventBtnClose(btnClose.item(btnClose.length - 1))
-});
+function addEventListener() {
+    btnAdd.addEventListener('click', ()=> {
+        countBeverage ++;
+        deadСountBeverage ++;
+        // console.log(countBeverage);
+        let el = document.getElementsByClassName('beverage');
+        let elClone = createNextField(el);
+    
+        el.item(el.length - 1).insertAdjacentElement('afterend', elClone);
+        addEventBtnClose(btnClose.item(btnClose.length - 1))
+    });
+}
 
 function addEventBtnClose(btn) {
     btn.addEventListener('click', (el)=> {
@@ -46,10 +52,11 @@ function createNextField(el) {
 }
 
 function renumberAttribute(arr){
+    // Не соблюдают измененную последовательность
     for(let i = 0; i < arr.length; i++){
         let attribute = arr[i].getAttribute('name');
-        attribute = attribute.replace('-1', `-${countBeverage}`); 
-        console.log(attribute);
+        attribute = attribute.replace('-1', `-${deadСountBeverage}`); 
+        // console.log(attribute);
         arr[i].setAttribute('name', attribute) 
         // console.log(input.getAttribute('name'));
     }
