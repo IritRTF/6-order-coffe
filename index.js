@@ -9,6 +9,7 @@ addEventBtnClose(btnClose.item(0)); //назначает onclick на самую
 addEventListener();
 addEventBtnSubmit();
 textareaBolder();
+
 // Склонение слов
 function num_word(value, words){  
 	value = Math.abs(value) % 100; 
@@ -30,8 +31,7 @@ function addEventBtnSubmit() {
         console.log(drinks);
         drinks.innerHTML = "Вы заказали " + countBeverage + " " + num_word(countBeverage, ["напиток", "напитка", "напитков", "напитков"]) +"!";
         let display = modalWindow.style.display;
-        // console.log(display);
-        // doTable();
+        doTable();
         modalWindow.style.display = 'block';
         overlay.style.display = 'block';
     });
@@ -56,54 +56,57 @@ function addEventListener() {
     });
 }
 function doTable(){
+    table= document.querySelector('#table')
+    header="<table><tr><th>Напиток</td><th>Молоко</th><th>Дополнительно</th><th>Пожелания</th></tr>"
 
-    let table= document.querySelector('#table')
-    header="<table><tr><th>Напиток</td><th>Молоко</th><th>Дополнительно</th></tr>"
-
-
-
-    e=document.getElementsByTagName('option')
+    e = document.getElementsByTagName('option');
     let len = e.length;
-    firstRow=[]
+    firstRow = [];
     for(let i = 0; i < len; i++){ 
         
         elemnt=document.getElementsByTagName('option') [i];
-        if (elemnt.selected===true)
+        if (elemnt.selected === true)
             firstRow.push("<td>"+elemnt.text + " </td>");
     }
 
-    e=document.getElementsByClassName('milk')
+    e = document.getElementsByClassName('milk');
     len = e.length;
-    secondRow=[]
+    secondRow = [];
     for(let i = 0; i < len; i++){ 
         elemnt=e[i]; 
-        if (elemnt.checked==true)
+        if (elemnt.checked === true)
             secondRow.push("<td>"+elemnt.value + " </td>");
     }
 
-    e=document.getElementsByClassName('toping')
+    e = document.getElementsByClassName('toping');
     len = e.length;
-    thirdRow=[]
-    listTop=""
+    thirdRow = [];
+    listTop = "";
     for(let i = 1; i < len+1; i++){ 
         elemnt=e[i-1]; 
-        if (elemnt.checked==true)
-            listTop+=elemnt.value+"<br>"
-        if (i%4==0){
-            thirdRow.push("<td>"+listTop + " </td>");
+        if (elemnt.checked === true)
+            listTop+=elemnt.value + "<br>"
+        if (i % 4 == 0){
+            thirdRow.push("<td>" + listTop + " </td>");
             listTop=""}
+    }
+
+    e=document.getElementsByClassName('text-display');
+    len = e.length;
+    fourthRow=[];
+    for(let i = 0; i < len; i++){ 
+        elemnt=e[i]; 
+        fourthRow.push("<td>" + elemnt.innerHTML + " </td>");
     }
 
     main=""
     len = firstRow.length;
-   
     for(let i = 0; i < len; i++){ 
-        main+="<tr>"+firstRow[i]+secondRow[i]+thirdRow[i]+"</tr>"
+        main += "<tr>" + firstRow[i] + secondRow[i] + thirdRow[i] + fourthRow[i] + "</tr>"
     }
     
-    foother="</table>";
-    
-    table.innerHTML= header+main+foother;
+    foother = "</table>";
+    table.innerHTML = header + main + foother
 
 }
 function addEventBtnClose(btn) {
@@ -158,7 +161,7 @@ function textareaBolder(){
     textarea = document.getElementsByClassName('textarea-more');
     textDisplay = document.getElementsByClassName('text-display');
     for (let i = 0; i < textDisplay.length; i++)
-    {
+    {   
         textarea[i].addEventListener('input', ()=> {
         text = textarea[i].value; 
         text = text.replaceAll("поскорее", "<b>поскорее</b>").replaceAll("Поскорее", "<b>Поскорее</b>");
@@ -184,14 +187,8 @@ function dateSelector() {
         let selectedHours = Number(String(time.value).split(':')[0])
         let selectedMinutes = Number(String(time.value).split(':')[1])
         let selectedTime = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), selectedHours, selectedMinutes, 0);
-        //Вернуться потом
         let formOrderData = new FormData(document.querySelector('.form-order'));
         let timeOrder = formOrderData.get('take-time');
-        // console.log(formOrderData.get('take-time'));
-        // console.log(`${selectedHours}:${selectedMinutes}`);
-        // console.log(`${currentTime.getHours() < timeOrder.split(':')[0] }:${currentTime.getMinutes()}`);
-        //Не работает) мб оставим как было?
-        // if(`${selectedHours}:${selectedMinutes}`)
         if(selectedTime < currentTime){
             time.style.borderColor = 'red';
             alert("Мы не умеем перемещаться во времени. Выберите время позже, чем текущее");
@@ -216,13 +213,6 @@ function createTable() {
 }
 
 function getFormData (forms, where) {
-    let table = document.createElement('table');
-    let thead = document.createElement('thead');
-    let tbody = document.createElement('tbody');
-    table.appendChild(thead);
-    table.appendChild(tbody);
-    where.insertAdjacentElement('afterend', table);
-    // tabel.create
     for(let i = 0; i < forms.length - 1; i++) {
         let formData = new FormData(forms[i]);
 
