@@ -1,4 +1,5 @@
 .beverage {
+    position: relative;
     border: 1px solid #eee;
     margin: 15px 0;
     padding: 15px;
@@ -28,11 +29,24 @@
     display: block;
 }
 
+.close-field {
+    position: absolute;
+    top:20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-image: url('./img/close.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
 .add-button {
     border: none;
     background: none;
     padding: 10px;
-    color: rgba(0, 27, 255, 0.82);
+    color: rgba(0, 27, 255, 0.82);   
     font-size: 14px;
     text-decoration: underline dashed;
     cursor: pointer;
@@ -45,3 +59,61 @@
     border-radius: 5px;
 }
 
+.modal-window {
+    display: none;
+    position: fixed;
+    width: 500px;
+    height: auto;
+    background-color: rgba(206, 206, 206, 1);
+    text-align: center;
+    left: calc(50% - 250px);
+    top: 25%;
+    border: 1px solid rgb(107, 106, 106);
+    flex-direction: column;
+    padding-bottom:15px;
+}
+
+.close-modal-window{
+    position: relative;
+    right: -470px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-image: url('./img/close.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.overlay{
+    display: none;
+    position:fixed;
+    left:0;
+    top: 0;
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+table{
+   border-collapse: collapse;
+   width: 90%;
+   margin: 0 auto;
+}
+
+td, th{
+    padding: 5px;
+    border: 1px solid;
+}
+.beverage{
+    background-color: rgb(210, 210, 210);
+}
+body{
+    background-color: rgb(243, 243, 243);
+    font-family: Verdana;
+    color:black;
+}
+
+#drinks-amount{
+    margin: 15px 0;
+}
