@@ -1,4 +1,5 @@
 .beverage {
+    position: relative;
     border: 1px solid #eee;
     margin: 15px 0;
     padding: 15px;
@@ -28,6 +29,20 @@
     display: block;
 }
 
+.close-field {
+    position: absolute;
+    top:20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-image: url('./img/Слой 1 копия.png');
+    background-color: rgba(206, 206, 206, 0);
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
 .add-button {
     border: none;
     background: none;
@@ -45,3 +60,40 @@
     border-radius: 5px;
 }
 
+.modal-window {
+    display: none;
+    position: fixed;
+    width: 500px;
+    height: auto;
+    background-color: rgba(206, 206, 206, 1);
+    text-align: center;
+    left: calc(50% - 250px);
+    top: 50%;
+    border: 1px solid rgb(107, 106, 106);
+}
+
+.close-modal-window{
+    position: relative;
+    left: 220px;
+    top: -30px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-image: url('./img/Слой 1 копия.png');
+    background-color: rgba(206, 206, 206, 0);
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+td, th{
+    border: 1px solid black;
+}
+.overlay{
+    display: none;
+    position:fixed;
+    left:0;
+    top: 0;
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.7);
+}
