@@ -6,64 +6,106 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <form>
-      <fieldset class="beverage">
-        <h4 class="beverage-count">Напиток №1</h4>
-        <label class="field">
-          <span class="label-text">Я буду</span>
-          <select>
-            <option value="espresso">Эспрессо</option>
-            <option value="capuccino" selected>Капучино</option>
-            <option value="cacao">Какао</option>
-          </select>
-        </label>
-        <div class="field">
-          <span class="checkbox-label">Сделайте напиток на</span>
-          <label class="checkbox-field">
-            <input type="radio" name="milk" value="usual" checked />
-            <span>обычном молоке</span>
+    <form id="form">
+      <section class="nap">
+        <fieldset class="beverage" id="id 1">
+          <img src="pic\SeekPng.com_red-x-png-transparent_3876735.png" class="pic" width="40" height="40" onclick="del_nap(this)">
+          <h4 class="beverage-count">Напиток №1</h4>
+          <label class="field">
+            <span class="label-text">Я буду</span>
+            <select class="selec" name="selec1">
+              <option value="espresso">Эспрессо</option>
+              <option value="capuccino" selected>Капучино</option>
+              <option value="cacao">Какао</option>
+            </select>
           </label>
-          <label class="checkbox-field">
-            <input type="radio" name="milk" value="no-fat" />
-            <span>обезжиренном молоке</span>
-          </label>
-          <label class="checkbox-field">
-            <input type="radio" name="milk" value="soy" />
-            <span>соевом молоке</span>
-          </label>
-          <label class="checkbox-field">
-            <input type="radio" name="milk" value="coconut" />
-            <span>кокосовом молоке</span>
-          </label>
+          <div class="field">
+            <span class="checkbox-label">Сделайте напиток на</span>
+            <label class="checkbox-field">
+              <input type="radio" class="rad" name="rad1" value="usual" checked />
+              <span>обычном молоке</span>
+            </label>
+            <label class="checkbox-field">
+              <input type="radio" class="rad" name="rad1" value="no-fat" />
+              <span>обезжиренном молоке</span>
+            </label>
+            <label class="checkbox-field">
+              <input type="radio" class="rad" name="rad1" value="soy" />
+              <span>соевом молоке</span>
+            </label>
+            <label class="checkbox-field">
+              <input type="radio" class="rad" name="rad1" value="coconut" />
+              <span>кокосовом молоке</span>
+            </label>
+          </div>
+          <div class="field">
+            <span class="checkbox-label">Добавьте к напитку:</span>
+            <label class="checkbox-field">
+              <input type="checkbox" class="check" name="check1.1" value="whipped cream" />
+              <span>взбитых сливок</span>
+            </label>
+            <label class="checkbox-field">
+              <input type="checkbox"  class="check" name="check1.2" value="marshmallow" />
+              <span>зефирок</span>
+            </label>
+            <label class="checkbox-field">
+              <input type="checkbox"  class="check" name="check1.3" value="chocolate" />
+              <span>шоколад</span>
+            </label>
+            <label class="checkbox-field">
+              <input type="checkbox"  class="check" name="check1.4" value="cinnamon" />
+              <span>корицу</span>
+            </label>
+          </div>
+          <div class="field">
+            <input class="tex" name="te1" id="text1" type="textarea">
+            <div class="pojel" name="poj" id="poj1">
+              Ваши пожелания:
+            </div>
+          </div>
+        </fieldset>
+     </section>
+
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+              <span class="close">&times</span>
+              <p class="napi">заказ принят</p>
+              <table class="tablee">
+                <colgroup span="4"></colgroup>
+                <tr>
+                  <th>Напиток</th>
+                  <th>Молоко</th>
+                  <th>Дополнительно</th>
+                  <th>Пожелание</th>
+                </tr>
+                
+              </table>
+              Выберите время заказа
+              <input class='fg' type="time" value="13:30" required>
+
+              <input type="button" class="op" value="Оформить" onclick="zxc()">
+              <script>function zxc(){
+                let date = new Date();
+                if(document.querySelector('.fg').value < `${date.getHours()}:${date.getMinutes()}`){
+                  document.querySelector('.fg').style.background='red'
+                  alert("Мы не умеем перемещаться во времени. Выберите время позже, чем текущее")
+                }
+                else{
+                  modal.style.display = "none"
+                }}
+              </script>
+          </div>
         </div>
-        <div class="field">
-          <span class="checkbox-label">Добавьте к напитку:</span>
-          <label class="checkbox-field">
-            <input type="checkbox" name="options" value="whipped cream" />
-            <span>взбитых сливок</span>
-          </label>
-          <label class="checkbox-field">
-            <input type="checkbox" name="options" value="marshmallow" />
-            <span>зефирок</span>
-          </label>
-          <label class="checkbox-field">
-            <input type="checkbox" name="options" value="chocolate" />
-            <span>шоколад</span>
-          </label>
-          <label class="checkbox-field">
-            <input type="checkbox" name="options" value="cinnamon" />
-            <span>корицу</span>
-          </label>
-        </div>
-      </fieldset>
+
+
       <div>
-        <button type="button" class="add-button">+ Добавить напиток</button>
+        <button type="button" class="add-button" onclick="add_nap()">+ Добавить напиток</button>
       </div>
+      
       <div style="margin-top: 30px">
-        <button type="submit" class="submit-button">Готово</button>
+        <button type="submit" id="myBtn" class="submit-button" >Готово</button>
       </div>
     </form>
-
     <script src="index.js"></script>
   </body>
 </html>
