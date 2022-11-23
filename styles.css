@@ -1,4 +1,5 @@
 .beverage {
+    position: relative;
     border: 1px solid #eee;
     margin: 15px 0;
     padding: 15px;
@@ -38,10 +39,74 @@
     cursor: pointer;
 }
 
-.submit-button {
+.close-button,
+.delete-button {
+    position: absolute;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-decoration: underline dashed;
+    top: 50px;
+    right: 50px;
+    width: 50px;
+    height: 50px;
+}
+
+.close-button {
+    top: 15px;
+    right: 15px;
+}
+
+.next-button {
     font-size: 16px;
     padding: 7px 15px;
     border: 2px solid orange;
     border-radius: 5px;
 }
 
+.modal-window{
+    position: fixed;
+    background-color: #dddddd;
+    width: 500px;
+    height: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+}
+
+.modal-wrapper {
+    display: none;
+    position: fixed;
+    left: 0;
+	top: 0;
+    width:100%;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay {
+    position: absolute;
+    background: rgba(0,0,0,.7);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.table {
+	width: 100% !important;
+	margin-bottom: 20px !important;
+	border: 1px solid #dddddd !important;
+	border-collapse: collapse !important; 
+}
+.table th {
+	font-weight: bold !important;
+	padding: 5px !important;
+	background: #efefef !important;
+	border: 1px solid #dddddd !important;
+}
+.table td {
+	border: 1px solid #dddddd !important;
+	padding: 5px !important;
+}
