@@ -1,168 +1,213 @@
-document.addEventListener('click', e => {
-    if (e.target.className !== 'tex') {
-        return
-    }
-    qwe = e.target.id
-    document.getElementById(qwe).oninput = function (s) {
-        w = e.target.value.split(' ');
-        w.forEach(function (item, i, w) {
-            if (item === "срочно" || item === "быстрее" || item === "побыстрее" || item === "скорее" || item === "поскорее" || item === "очень нужно") {
-                w[i] = w[i].bold()
+let countBeverage = 1;
+let deadСountBeverage = 1;
 
-            }
-        });
-        //console.log(e.target,e.target.value)
-        w = w.join(' ')
-        //.replace(/Dav(?:e|id) срочно|быстрее|побыстрее|скорее|  |очень нужно/ig, `${e.target.value.bold()}`)
+let btnAdd = document.querySelector('.add-button');
+let btnClose = document.getElementsByClassName('close-field');
+let seqNum = document.getElementsByClassName('sequence-number');
 
-        document.querySelector(`#poj${qwe.substr(4)}`).innerHTML = `Ваши пожелания: ${w}`;
-    };
-})
-
-
-// `"срочно"`, `"быстрее"` / `"побыстрее"`, `"скорее"` / `"поскорее"`, `"очень нужно"`
-
-function add_nap() {
-    let dop = 0
-    count = document.getElementsByClassName('beverage').length + 1;
-    let parent_drink = document.querySelector('.beverage')
-    let drink2 = parent_drink.cloneNode(true)
-    drink2.querySelector('.beverage-count').innerHTML = `Напиток №${count}`;
-    drink2.id = `id ${count}`
-    drink2.querySelectorAll('.selec').forEach((milk) => {
-        milk.name = `selec${count}`
-    })
-    drink2.querySelector('.tex').id = `text${count}`
-    drink2.querySelector('.tex').name = `te${count}`
-    drink2.querySelector('.pojel').id = `poj${count}`
-    drink2.querySelectorAll('.rad').forEach((milk) => {
-        milk.name = `rad${count}`
-    })
-    drink2.querySelectorAll('.check').forEach((opt) => {
-        dop += 1
-        opt.name = `check${count}.${dop}`
-    })
-    document.querySelector('.nap').append(drink2)
+addEventBtnClose(btnClose.item(0)); //назначает onclick на самую первую кнопку, не убирать
+addEventListener();
+addEventBtnSubmit();
+textareaBolder();
+// Склонение слов
+function num_word(value, words){
+	value = Math.abs(value) % 100;
+	let num = value % 10;
+	if(value > 10 && value < 20) return words[2];
+	if(num > 1 && num < 5) return words[1];
+	if(num == 1) return words[0];
+	return words[2];
 }
 
-function del_nap(qwe) {
-    if (document.querySelectorAll('.beverage').length === 1) {
-        return
-    }
-    qwe.closest('.beverage').remove()
+function addEventBtnSubmit() {
+    let btnSubmit = document.querySelector('.submit-button');
+    let modalWindow = document.querySelector('.modal-window');
+    let overlay = document.querySelector('.overlay');
+    let drinks = document.querySelector('#drinks-amount');
+    let closeButton = document.querySelector('.close-modal-window');
 
-    count = 0
-    document.querySelectorAll('.beverage-count').forEach((s) => {
-        count += 1
+    btnSubmit.addEventListener('click', ()=> {
+        console.log(drinks);
+        drinks.innerHTML = "Вы заказали " + countBeverage + " " + num_word(countBeverage, ["напиток", "напитка", "напитков", "напитков"]) +"!";
+        let display = modalWindow.style.display;
+         doTable();
+        modalWindow.style.display = 'block';
+        overlay.style.display = 'block';
+    });
 
-        s.innerHTML = `Напиток №${count}`;
-
-    })
-
-    count = 0
-    let dop = 0
-    document.querySelectorAll('.beverage').forEach((s) => {
-        count += 1
-        s.querySelectorAll('.tex').forEach((milk) => {
-            milk.id = `text${count}`
-        })
-        s.querySelectorAll('.tex').forEach((milk) => {
-            milk.name = `te${count}`
-        })
-        s.querySelectorAll('.pojel').forEach((milk) => {
-            milk.id = `poj${count}`
-        })
-        s.querySelectorAll('.selec').forEach((milk) => {
-            milk.name = `selec${count}`
-        })
-        s.querySelectorAll('.rad').forEach((milk) => {
-            milk.name = `rad${count}`
-        })
-        s.querySelectorAll('.check').forEach((milk) => {
-            dop += 1
-            milk.name = `check${count}.${dop}`
-        })
-        s.id = `id ${count}`
+    closeButton.addEventListener('click', ()=> {
+        modalWindow.style.display = 'none';
+        overlay.style.display = 'none';
     })
 }
 
+function addEventListener() {
+    btnAdd.addEventListener('click', ()=> {
+        countBeverage ++;
+        deadСountBeverage ++;
+        let el = document.getElementsByClassName('beverage');
+        let elClone = createNextField(el);
 
-var modal = document.getElementById("myModal")
-var btn = document.getElementById("myBtn")
-var span = document.getElementsByClassName("close")[0]
+        el.item(el.length - 1).insertAdjacentElement('afterend', elClone);
+        addEventBtnClose(btnClose.item(btnClose.length - 1))
+        textareaBolder();
+    });
+}
+function doTable(){
+    table= document.querySelector('#table')
+    header="<table><tr><th>Напиток</td><th>Молоко</th><th>Дополнительно</th><th>Пожелания</th></tr>"
+    e=document.getElementsByTagName('option');
+    let len = e.length;
+    firstRow=[];
+    for(let i = 0; i < len; i++){
 
-btn.onclick = function () {
-    modal.style.display = "block"
-    modal.querySelector('.napi').innerHTML = `"Вы заказали ${num_word(document.getElementsByClassName('beverage').length)}"`
+        elemnt=document.getElementsByTagName('option') [i];
+        if (elemnt.selected===true)
+            firstRow.push("<td>"+elemnt.text + " </td>");
+    }
 
-    const {form} = document.forms;
+    e=document.getElementsByClassName('milk');
+    len = e.length;
+    secondRow=[];
+    for(let i = 0; i < len; i++){
+        elemnt=e[i];
+        if (elemnt.checked==true)
+            secondRow.push("<td>"+elemnt.value + " </td>");
+    }
 
-    function ret(event) {
-        event.preventDefault();
+    e=document.getElementsByClassName('toping');
+    len = e.length;
+    thirdRow=[];
+    listTop="";
+    for(let i = 1; i < len+1; i++){
+        elemnt=e[i-1];
+        if (elemnt.checked==true)
+            listTop+=elemnt.value+"<br>"
+        if (i%4==0){
+            thirdRow.push("<td>"+listTop + " </td>");
+            listTop=""}
+    }
 
-        const formData = new FormData(form);
-        const values = Object.fromEntries(formData.entries());
+    e=document.getElementsByClassName('text-display');
+    len = e.length;
+    fourthRow=[];
+    for(let i = 0; i < len; i++){
+        elemnt=e[i];
 
-        newTr = document.createElement("tr");
-        let flag = 0
+        fourthRow.push("<td>"+elemnt.innerHTML + " </td>");
+    }
 
-        console.log(values)
-        for (i in values) {
+    main=""
+    len = firstRow.length;
 
-            if (i.substr(0, 5) === 'selec') {
-                flag = 0
-                newTr = document.createElement("tr");
-                newTd = document.createElement("td");
-                newTd.innerHTML = values[i];
-                newTr.append(newTd)
-                document.querySelector('.tablee').append(newTr)
+    for(let i = 0; i < len; i++){
+        main+="<tr>"+firstRow[i]+secondRow[i]+thirdRow[i]+fourthRow[i]+"</tr>"
+    }
 
-            } else {
-                if (i.substr(0, 5) === 'check' && flag === 1) {
-                    newTd.innerHTML += ', ' + values[i]
-                } else {
-                    if (i.substr(0, 2) === 'te' && prov !== 'check') {
-                        console.log(prov)
-                        newTd = document.createElement("td");
-                        newTd.innerHTML = '';
-                        newTr.append(newTd)
+    foother="</table>";
 
-                    }
+    table.innerHTML=header+main+foother
 
-                    if (i.substr(0, 5) === 'check') {
-                        flag = 1
-                    }
-                    prov = i.substr(0, 5)
-                    newTd = document.createElement("td");
-                    newTd.innerHTML = values[i];
-                    newTr.append(newTd)
-                    document.querySelector('.tablee').append(newTr)
+}
+function addEventBtnClose(btn) {
+    btn.addEventListener('click', (el)=> {
+        if(countBeverage > 1) {
+            thisElBtn = el.target;
+            let parent = thisElBtn.parentNode;
+            parent.parentNode.removeChild(parent);
+            countBeverage--;
+            updateSeqNum();
+        }
+    });
+}
 
-                }
-            }
+function createNextField(el) {
+    let elClone = el.item(0).cloneNode(true);
+    let seqNum = elClone.querySelector('.sequence-number');
+    seqNum.innerHTML = countBeverage;
+
+    let inputs = elClone.querySelectorAll('input');
+    let selecters = elClone.querySelectorAll('select');
+    renumberAttribute(inputs);
+    renumberAttribute(selecters);
+
+    return elClone;
+}
+
+function renumberAttribute(arr){
+    for(let i = 0; i < arr.length; i++){
+        let attribute = arr[i].getAttribute('name');
+        attribute = attribute.replace('-1', `-${deadСountBeverage}`);
+        arr[i].setAttribute('name', attribute)
+    }
+}
+
+function updateSeqNum() {
+    let len = seqNum.length;
+    for(let i = 0; i < len; i++){
+        seqNum[i].innerHTML = i + 1;
+    }
+}
+
+function textareaBolder(){
+    textarea = document.getElementsByClassName('textarea-more');
+    textDisplay = document.getElementsByClassName('text-display');
+    for (let i = 0; i < textDisplay.length; i++)
+    {
+        textarea[i].addEventListener('input', ()=> {
+        text = textarea[i].value;
+        text = text.replaceAll("поскорее", "<b>поскорее</b>").replaceAll("Поскорее", "<b>Поскорее</b>");
+        text = text.replaceAll("побыстрее", "<b>побыстрее</b>").replaceAll("Побыстрее", "<b>Побыстрее</b>");
+        text = text.replaceAll("скорее", "<b>скорее</b>").replaceAll("Скорее", "<b>Скорее</b>");
+        text = text.replaceAll("срочно", "<b>срочно</b>").replaceAll("Срочно", "<b>Срочно</b>");
+        text = text.replaceAll("быстрее", "<b>быстрее</b>").replaceAll("Быстрее", "<b>Быстрее</b>");
+        text = text.replaceAll("очень нужно", "<b>очень нужно</b>").replaceAll("Очень нужно", "<b>Очень нужно</b>");
+        textDisplay[i].innerHTML = text;
+        })
+    }
+}
+
+dateSelector()
+function dateSelector() {
+    let time = document.querySelector('.take-time-input');
+    let submit = document.querySelector('.submit-modal-window');
+    let modalWindow = document.querySelector('.modal-window');
+    let overlay = document.querySelector('.overlay');
+
+    submit.addEventListener('click', ()=> {
+        let currentTime = new Date();
+        let selectedHours = Number(String(time.value).split(':')[0])
+        let selectedMinutes = Number(String(time.value).split(':')[1])
+        let selectedTime = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), selectedHours, selectedMinutes, 0);
+        let formOrderData = new FormData(document.querySelector('.form-order'));
+        let timeOrder = formOrderData.get('take-time');
+        if(selectedTime < currentTime){
+            time.style.borderColor = 'red';
+            alert("Мы не умеем перемещаться во времени. Выберите время позже, чем текущее");
+        }
+        else{
+            time.style.borderColor = 'green';
+            modalWindow.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    });
+}
+
+function createTable() {
+    let submit = document.querySelector('.submit-button');
+    submit.addEventListener('click', ()=> {
+        let drinks = document.querySelector('#drinks-amount');
+        let forms = document.forms;
+        getFormData(forms, drinks);
+    });
+}
+
+function getFormData (forms, where) {
+    for(let i = 0; i < forms.length - 1; i++) {
+        let formData = new FormData(forms[i]);
+
+        for(let [name, value] of formData) {
+            console.log(`${name} = ${value}`);
         }
     }
-
-    form.addEventListener('submit', ret)
-}
-
-span.onclick = function () {
-    modal.style.display = "none";
-}
-
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none"
-    }
-}
-
-words = ['Напиток', 'Напитка', 'Напитков']
-
-function num_word(value) {
-    value = Math.abs(value) % 100;
-    var num = value % 10;
-    if (value > 10 && value < 20) return (value + ' ' + words[2]);
-    if (num > 1 && num < 5) return (value + ' ' + words[1]);
-    if (num == 1) return (value + ' ' + words[0]);
-    return (value + ' ' + words[2]);
 }
