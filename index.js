@@ -29,8 +29,6 @@ function addEventBtnSubmit() {
     btnSubmit.addEventListener('click', ()=> {
         console.log(drinks);
         drinks.innerHTML = "Вы заказали " + countBeverage + " " + num_word(countBeverage, ["напиток", "напитка", "напитков", "напитков"]) +"!";
-        let display = modalWindow.style.display;
-        // console.log(display);
         doTable();
         modalWindow.style.display = 'flex';
         overlay.style.display = 'flex';
@@ -148,4 +146,29 @@ function textareaBolder(){
         textDisplay[i].innerHTML = text;
         })
     }
+}
+
+dateSelector()
+function dateSelector() {
+    let time = document.querySelector('.take-time-input');
+    let submit = document.querySelector('.submit-modal-window');
+    let modalWindow = document.querySelector('.modal-window');
+    let overlay = document.querySelector('.overlay');
+
+    submit.addEventListener('click', ()=> {
+        let currentTime = new Date();
+        let selectedHours = Number(String(time.value).split(':')[0])
+        let selectedMinutes = Number(String(time.value).split(':')[1])
+        let selectedTime = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), selectedHours, selectedMinutes, 0);
+        let formOrderData = new FormData(document.querySelector('.form-order'));
+        if(selectedTime < currentTime){
+            time.style.borderColor = 'red';
+            alert("Мы не умеем перемещаться во времени. Выберите время позже, чем текущее");
+        }
+        else{
+            time.style.borderColor = 'green';
+            modalWindow.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    });
 }
