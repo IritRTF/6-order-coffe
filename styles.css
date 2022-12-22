@@ -60,33 +60,48 @@
 	top: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.3);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
 	width: 100%;
-	opacity: 0;
-	visibility: hidden;
-	transition: all 0.3s ease-in-out;
+
 }
 
-.modal {
-	background-color: #fff;
-	width: 300px;
-	height: 300px;
-	display: flex;
+
+.modal-window{
+    position: relative;
+    width: 500px;
+    flex-flow: row wrap;
+    background-color: rgba(28, 26, 26, 0.3);
+}
+
+
+
+.big-modal{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.4);
+	width: 100%;
 	align-items: center;
-	justify-content: center;
-	display: block;
+	height: 100%;
 }
 
-.modal-overlay--visible {
-	opacity: 1;
-	visibility: visible;
-	transition: all 1.5s ease-in-out;
+
+.hidden{
+    visibility: hidden;
 }
 
-.modal--visible {
-	display: block;
+
+
+.close-overlay{
+    position:absolute;
+    top: 0px;
+    right: 0px;
+    color: red;
+}
+
+
+.hide {
+    display: none;
 }
