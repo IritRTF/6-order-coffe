@@ -2,33 +2,34 @@
     border: 1px solid #eee;
     margin: 15px 0;
     padding: 15px;
-}
-
-.beverage-count {
+    position: relative;
+  }
+  
+  .beverage-count {
     margin: 0 0 15px;
-}
-
-.field {
+  }
+  
+  .field {
     display: block;
     margin-bottom: 10px;
-}
-
-.label-text {
+  }
+  
+  .label-text {
     display: inline-block;
     width: 80px;
-}
-
-.checkbox-label {
+  }
+  
+  .checkbox-label {
     margin-bottom: 5px;
     display: inline-block;
-}
-
-.checkbox-field {
+  }
+  
+  .checkbox-field {
     margin: 5px 0;
     display: block;
-}
-
-.add-button {
+  }
+  
+  .add-button {
     border: none;
     background: none;
     padding: 10px;
@@ -36,12 +37,43 @@
     font-size: 14px;
     text-decoration: underline dashed;
     cursor: pointer;
-}
-
-.submit-button {
+  }
+  
+  .submit-button {
     font-size: 16px;
     padding: 7px 15px;
     border: 2px solid orange;
     border-radius: 5px;
-}
-
+  }
+  
+  .close-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+  }
+  
+  dialog {
+    padding: 15px;
+    padding-top: 30px;
+    max-width: 700px;
+  }
+  
+  .modal-content {
+    text-align: center;
+  }
+  
+  .order {
+    text-align: center;
+    align-self: center;
+    border: 2px solid black;
+    border-collapse: collapse;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .order-cell {
+    border: 2px solid black;
+    border-collapse: collapse;
+  }
