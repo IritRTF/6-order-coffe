@@ -2,6 +2,7 @@
     border: 1px solid #eee;
     margin: 15px 0;
     padding: 15px;
+    position: relative;
 }
 
 .beverage-count {
@@ -45,3 +46,31 @@
     border-radius: 5px;
 }
 
+.remove-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+}
+
+dialog {
+    width: 500px;
+}
+
+.modal-content {
+    text-align: center;
+}
+
+.order {
+    text-align: center;
+    align-self: center;
+    border: 2px solid black;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+.order-cell {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
