@@ -1,9 +1,68 @@
+body{
+    font-size: 22px;
+}
+.beverage-list{
+    display: inline-flex;
+}
+.eror{
+    border:2px solid red;
+}
+.select-time{
+    margin: 10px;
+}
+.submit-modal{
+    font-size: 16px;
+    padding: 7px 15px;
+    border: 2px solid orange;
+    border-radius: 5px;
+}
+.modal-overlay{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.close-button-modal{
+    position:absolute;
+    top:0px;
+    right: 0px;
+}
+.modal-window{
+    display: block;
+    padding: 20px;
+    position: absolute;
+    width:500px;
+    z-index: 2;
+    margin-top: 300px;
+    margin-left:450px;
+    background-color: aliceblue;
+}
+
+.modal-window h4{
+    text-align: center;
+}
 .beverage {
-    border: 1px solid #eee;
-    margin: 15px 0;
+    position: relative;
+    border: 1px solid #eae;
+    margin: 15px;
     padding: 15px;
 }
 
+.modal-info th,td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.close-button{
+    position:absolute;
+    top:0px;
+    right: 0px;
+}
 .beverage-count {
     margin: 0 0 15px;
 }
