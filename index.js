@@ -45,7 +45,7 @@ function createTable() {
         let str = document.createElement("tr");
         str.classList.add("order-cell");
         let drink = document.createElement("td");
-        drink.innerHTML = form.querySelector("option[selected]").innerHTML;
+        drink.innerHTML = form.querySelector("select").options[form.querySelector('select').selectedIndex].innerHTML;
         drink.classList.add("order-cell");
         str.append(drink);
         let milk = document.createElement("td");
