@@ -6,12 +6,14 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <form>
-      <fieldset class="beverage">
+    <form onsubmit="return false">
+      <section class = "beverage-list">
+        <fieldset class="beverage">
+          
         <h4 class="beverage-count">Напиток №1</h4>
         <label class="field">
           <span class="label-text">Я буду</span>
-          <select>
+          <select id="drink-type">
             <option value="espresso">Эспрессо</option>
             <option value="capuccino" selected>Капучино</option>
             <option value="cacao">Какао</option>
@@ -55,13 +57,36 @@
             <span>корицу</span>
           </label>
         </div>
+        <div class = "wishes">
+          <label class="checkbox-field">И вот ещё что..<br>
+            <textarea id="input-wishes" cols="30" rows="5"></textarea>
+            <div class="wish" ></div>
+          </label>
+        </div>
+        <button class="close-button" onclick="return false">&#10060;</button>
       </fieldset>
+      
+      </section>   
       <div>
         <button type="button" class="add-button">+ Добавить напиток</button>
       </div>
       <div style="margin-top: 30px">
         <button type="submit" class="submit-button">Готово</button>
       </div>
+
+      <div class="modal-overlay">
+        <section class="modal-window">
+          <button class="close-button-modal" onclick="return false">&#10060;</button>
+          <h4>Заказ принят!</h4>
+          <div class="modal-info"></div>
+          <label class = "select-time"> Выберите время заказа
+            <input type="time" id="beverage-time" >
+          </label>
+          <div>
+            <button type="time" class="submit-modal">Оформить</button>
+          </div>
+        </section>
+      </div>     
     </form>
 
     <script src="index.js"></script>
