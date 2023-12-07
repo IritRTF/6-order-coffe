@@ -45,3 +45,39 @@
     border-radius: 5px;
 }
 
+.remove-button {
+    position: relative;
+    left: 98%;
+	width: 24px;
+	height: 24px;
+	opacity: 0.5;
+	cursor: pointer;
+  transition: opacity ease 0.5s;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+
+#dialog {
+    position: fixed;
+    top: 20%;
+    left: 30%;
+    overflow: auto;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    min-height: 200px;
+    max-height: 90%;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    z-index: 1000;
+}
+
+
+.modal-content {
+    text-align: center;
+}
+
